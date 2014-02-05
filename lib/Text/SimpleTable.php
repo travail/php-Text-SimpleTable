@@ -137,9 +137,9 @@ class SimpleTable
 
             // Check for hr
             foreach (range(0, $columns) as $tmp) {
-                if (!isset($this->columns[$tmp][1][$i])) {
+                if (is_null($this->columns[$tmp][1][$i])) {
                     $output .= $this->draw_hr();
-                    break 2;
+                    continue 2;
                 }
             }
 
@@ -197,7 +197,13 @@ class SimpleTable
     }
 
     public function hr()
-    {}
+    {
+        foreach (range(0, count($this->columns) - 1) as $i) {
+            array_push($this->columns[$i][1], null);
+        }
+
+        return $this;
+    }
 
     public function row()
     {
