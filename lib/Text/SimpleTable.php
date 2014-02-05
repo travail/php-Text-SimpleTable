@@ -134,10 +134,12 @@ class SimpleTable
 
         // Rows
         foreach (range(0, $rows) as $i) {
+
+            // Check for hr
             foreach (range(0, $columns) as $tmp) {
-                if (!isset($this->columns[$tmp][1][$i])) {
+                if (is_null($this->columns[$tmp][1][$i])) {
                     $output .= $this->draw_hr();
-                    continue;
+                    continue 2;
                 }
             }
 
@@ -183,7 +185,7 @@ class SimpleTable
                 $text = $text . self::BOTTOM_RIGHT;
             }
             else {
-                $text . self::BOTTOM_SEPARATOR;
+                $text = self::BOTTOM_SEPARATOR;
             }
 
             $output .= $text;
@@ -195,7 +197,13 @@ class SimpleTable
     }
 
     public function hr()
-    {}
+    {
+        foreach (range(0, count($this->columns) - 1) as $i) {
+            array_push($this->columns[$i][1], null);
+        }
+
+        return $this;
+    }
 
     public function row()
     {
@@ -213,31 +221,29 @@ class SimpleTable
         $cache = array();
         $max   = 0;
 
-        for ($i = 0; $i < count($size) + 1; $i++) {
-            $text = array_shift($texts);
+        foreach (range(0, $size) as $i) {
+            $text   = array_shift($texts);
             $column = $this->columns[$i];
-            $width = $column[0];
+            $width  = $column[0];
             $pieces = $this->wrap($text, $width);
 
-            foreach ($pieces as $piece) {
-                // TODO: Really?
-                array_push($cache, $piece);
-            }
+            array_push($cache, $pieces);
             if (count($pieces) > $max) $max = count($pieces);
         }
 
-        foreach ($cache as $col) {
-            while (count($col) < $max) {
-                array_push($col, '');
+        foreach (range(0, count($cache) -1) as $i) {
+            while (count($cache[$i]) < $max) {
+                array_push($cache[$i], '');
             }
         }
 
-        for ($i = 0; $i < count($size) + 1; $i++) {
-            $column = $this->columns[$i];
-            $store = $column[1];
-            array_push($store, $cache[$i]);
-            $this->columns[$i][1] = $store;
+        foreach (range(0, $size) as $i) {
+            foreach ($cache[$i] as $str) {
+                $this->columns[$i][1][] = $str;
+            }
         }
+
+        return $this;
     }
 
     protected function draw_hr()
@@ -273,6 +279,7 @@ class SimpleTable
 
     protected function wrap($text, $width)
     {
+        if (is_array($text)) $text = array_shift($text);
         $cache = array();
         $parts = explode("\n", $text);
 
