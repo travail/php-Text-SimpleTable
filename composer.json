@@ -1,0 +1,11 @@
+{
+  "name": "travail/text-simpletable",
+  "description": "travail/text-simpletable",
+  "license": "PHP-3.0",
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Text\\": "lib"
+    }
+  }
+}
