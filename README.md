@@ -1,15 +1,18 @@
-# \Text\SimpleTable
+\Text\SimpleTable
+========
 
 ## NAME
 
-\Text\SimpleTable - Simple Eyecandy ASCII Tables port of [Text::SimpleTable](https://metacpan.org/pod/Text::SimpleTable)
+\Text\SimpleTable - Simple Eyecandy ASCII Tables
 
 ## SYNOPSIS
 
 ```php
-require_once '/path/to/Text/SimpleTable.php';
+use \Text\SimpleTable;
 
-$table = new \Text\SimpleTable(10, 20);
+require_once '/path/to/vendor/autoload.php';
+
+$table = new SimpleTable(10, 20);
 $table->row('KEY1', 'VALUE1');
 $table->row('KEY2', 'VALUE2');
 $table->row('KEY3', 'VALUE3');
@@ -26,7 +29,7 @@ echo $table->draw();
 '------------+----------------------'
 */
 
-$table = new \Text\SimpleTable(array(10, 'KEY'), array(20, 'VALUE'));
+$table = new SimpleTable(array(10, 'KEY'), array(20, 'VALUE'));
 $table->row('KEY1', 'VALUE1');
 $table->row('KEY2', 'VALUE2');
 $table->row('KEY3', 'VALUE3');
@@ -45,7 +48,7 @@ echo $table->draw();
 '------------+----------------------'
 */
 
-$table = new \Text\SimpleTable(10, 20);
+$table = new SimpleTable(10, 20);
 $table->row('KEY1', 'VALUE1');
 $table->hr();
 $table->row('KEY2', 'VALUE2');
@@ -63,6 +66,27 @@ echo $table->draw();
 '------------+----------------------'
 */
 
+```
+
+## INSTALLATION
+
+To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer install`.
+
+```
+"require": {
+    "travail/text-simpletable": "dev-master"
+}
+```
+
+If you want to install from gihub, add the following:
+
+```
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:travail/php-Text-SimpleTable.git"
+    }
+]
 ```
 
 ## METHODS
