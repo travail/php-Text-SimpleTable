@@ -25,9 +25,16 @@ class SimpleTable
 
     const WRAP = '-';
 
-    protected $version = 0.01;
+    /**
+     * @var array
+     */
     protected $columns = array();
 
+    /**
+     * Create a new instance of \Text\SimpleTable
+     *
+     * @param mixed
+     */
     function __construct()
     {
         $args = func_get_args();
@@ -66,6 +73,11 @@ class SimpleTable
         $this->columns = $cache;
     }
 
+    /**
+     * Draw ASCII table
+     *
+     * @return string $output ASCII table
+     */
     public function draw()
     {
         $rows    = count($this->columns[0][1]) - 1;
@@ -196,15 +208,23 @@ class SimpleTable
         return $output;
     }
 
+    /**
+     * Draw an hr
+     *
+     * @return void
+     */
     public function hr()
     {
         foreach (range(0, count($this->columns) - 1) as $i) {
             array_push($this->columns[$i][1], null);
         }
-
-        return $this;
     }
 
+    /**
+     * Draw a row
+     *
+     * @return void
+     */
     public function row()
     {
         $texts = func_get_args();
@@ -242,8 +262,6 @@ class SimpleTable
                 $this->columns[$i][1][] = $str;
             }
         }
-
-        return $this;
     }
 
     protected function draw_hr()
