@@ -4,6 +4,11 @@ namespace Text;
 
 class SimpleTable
 {
+    /**
+     * @var string The version of this package
+     */
+    const VERSION = '0.1.0';
+
     const TOP_LEFT      = '.-';
     const TOP_BORDER    = '-';
     const TOP_SEPARATOR = '-+-';
