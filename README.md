@@ -1,14 +1,14 @@
-\Text\SimpleTable
+Text\SimpleTable
 ========
 
 ## NAME
 
-\Text\SimpleTable - Simple Eyecandy ASCII Tables
+Text\SimpleTable - Simple Eyecandy ASCII Tables
 
 ## SYNOPSIS
 
 ```php
-use \Text\SimpleTable;
+use Text\SimpleTable;
 
 require_once '/path/to/vendor/autoload.php';
 
@@ -55,7 +55,6 @@ $table->row('KEY2', 'VALUE2');
 $table->hr();
 $table->row('KEY3', 'VALUE3');
 echo $table->draw();
-
 /*
 .------------+----------------------.
 | KEY1       | VALUE1               |
@@ -66,6 +65,26 @@ echo $table->draw();
 '------------+----------------------'
 */
 
+$table = new SimpleTable(array(10, '国'), array(20, '首都'));
+$table->row('日本', '東京');
+$table->row('America', 'Washington D.C.');
+$table->row('England', 'London');
+$table->row('France', 'Paris');
+$table->row('台湾', '台北');
+// Set encoding, "UTF-8" by default.
+// $table->setEncoding($encoding);
+echo $table->draw();
+/*
+.------------+----------------------.
+| 国         | 首都                 |
++------------+----------------------+
+| 日本       | 東京                 |
+| America    | Washington D.C.      |
+| England    | London               |
+| France     | Paris                |
+| 台湾       | 台北                 |
+'------------+----------------------'
+*/
 ```
 
 ## INSTALLATION
@@ -93,20 +112,57 @@ If you want to install from gihub, add the following:
 
 ### __construct
 
-`__construct(int $width [, int $width [, ...]])`
-`__construct(array ($width, $col_name) [, array ($width, $col_name) [, ...]])`
+```php
+__construct(int $width [, int $width [, ...]])
+```
 
-### draw
+To draw simple table set *$width* to the number of columns.
 
-`string draw(void)`
+```php
+__construct(array ($width, $col_name) [, array ($width, $col_name) [, ...]])
+```
 
-### hr
-
-`void hr(void)`
+To draw table with header set *$width* and *$col_name* in array to the number of columns.
 
 ### row
 
-`void row(string $value [, string $value [, ...]])`
+```php
+void row(string $value [, string $value [, ...]])
+```
+
+Draw row.
+
+### hr
+
+```php
+void hr(void)
+```
+
+Draw horizontal rule.
+
+### setEncoding
+
+```php
+void setEncoding(string $encoding)
+```
+
+To draw table with multibyte characters set current character encoding. *UTF-8* by default.
+
+### getEncoding
+
+```php
+string getEncoding()
+```
+
+Returns current character encoding.
+
+### draw
+
+```php
+string draw(void)
+```
+
+Draw text table.
 
 ## THANKS TO
 
