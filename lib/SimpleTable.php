@@ -7,7 +7,9 @@ class SimpleTable
     /**
      * @var string The version of this package
      */
-    const VERSION = '0.1.0';
+    const VERSION = '0.1.1';
+
+    const DEFAULT_ENCODING = 'UTF-8';
 
     const TOP_LEFT      = '.-';
     const TOP_BORDER    = '-';
@@ -34,6 +36,11 @@ class SimpleTable
      * @var array
      */
     protected $columns = array();
+
+    /**
+     * @var string
+     */
+    protected $encoding = self::DEFAULT_ENCODING;
 
     /**
      * Create a new instance of \Text\SimpleTable
@@ -76,6 +83,26 @@ class SimpleTable
         }
 
         $this->columns = $cache;
+    }
+
+    /**
+     * Set encoding
+     *
+     * @param string $encoding Internal character encoding
+     */
+    public function setEncoding($encoding)
+    {
+        $this->encoding = $encoding;
+    }
+
+    /**
+     * Get encoding
+     *
+     * @return string Internal character encoding
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
     }
 
     /**
@@ -123,8 +150,7 @@ class SimpleTable
                     $column = $this->columns[$j];
                     $width  = $column[0];
                     $text   = isset($column[2][$i]) ? $column[2][$i] : '';
-
-                    $text = sprintf("%-{$width}s", $text);
+                    $text   = sprintf("%s%s", $text, str_repeat(' ', $width - mb_strwidth($text, $this->encoding)));
 
                     if (($j === 0) && ($columns === 0)) {
                         $text = self::LEFT_BORDER . $text . self::RIGHT_BORDER;
@@ -164,8 +190,7 @@ class SimpleTable
                 $column = $this->columns[$j];
                 $width  = $column[0];
                 $text   = isset($column[1][$i]) ? $column[1][$i] : '';
-
-                $text = sprintf("%-{$width}s", $text);
+                $text   = sprintf("%s%s", $text, str_repeat(' ', $width - mb_strwidth($text, $this->encoding)));
 
                 if (($j === 0) && ($columns === 0)) {
                     $text = self::LEFT_BORDER . $text . self::RIGHT_BORDER;
