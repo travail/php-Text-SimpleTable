@@ -1,6 +1,6 @@
 <?php
 
-use \Text\SimpleTable;
+use Text\SimpleTable;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
