@@ -7,7 +7,7 @@ class SimpleTable
     /**
      * @var string The version of this package
      */
-    const VERSION = '0.1.1';
+    const VERSION = '0.1.2';
 
     const DEFAULT_ENCODING = 'UTF-8';
 
