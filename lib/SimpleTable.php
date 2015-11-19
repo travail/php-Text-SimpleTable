@@ -224,10 +224,10 @@ class SimpleTable
                 $text = self::BOTTOM_LEFT . $text . self::BOTTOM_SEPARATOR;
             }
             elseif ($j === $columns) {
-                $text = $text . self::BOTTOM_RIGHT;
+                $text .= self::BOTTOM_RIGHT;
             }
             else {
-                $text = self::BOTTOM_SEPARATOR;
+                $text .= self::BOTTOM_SEPARATOR;
             }
 
             $output .= $text;
