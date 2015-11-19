@@ -1,6 +1,10 @@
 CHANGELOG
 ========
 
+## 0.1.2
+
+* Fix corrpt table with greater than or equal to three columns
+
 ## 0.1.1 2015-07-24
 
 * Work with multibyte characters
