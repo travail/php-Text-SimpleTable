@@ -77,7 +77,7 @@ class SimpleTable
 
         // Padding
         foreach ($cache as $col) {
-            while ($col[2] < $max) {
+            while (count($col[2]) < $max) {
                 array_push($col[2], '');
             }
         }
@@ -141,7 +141,7 @@ class SimpleTable
 
         $title = 0;
         foreach ($this->columns as $column) {
-            if ($title < count($column[0])) $title = count($column[2]);
+            if ($title < count($column[2])) $title = count($column[2]);
         }
 
         if ($title) {
@@ -263,7 +263,7 @@ class SimpleTable
         // Shortcut
         if ($size < 0) return $this;
 
-        for ($i = 0; $i < count($size) + 1; $i++) {
+        for ($i = 0; $i < $size + 1; $i++) {
             if ($size <= count($texts)) break;
             array_push($texts, '');
         }
